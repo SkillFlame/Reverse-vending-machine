@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>7</number>
+     </property>
+     <widget class="QWidget" name="page_idle">
+      <widget class="QPushButton" name="button_idle">
+       <property name="geometry">
+        <rect>
+         <x>-40</x>
+         <y>-10</y>
+         <width>441</width>
+         <height>301</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>46</x>
+         <y>25</y>
+         <width>291</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Idle</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <zorder>label</zorder>
+      <zorder>button_idle</zorder>
+     </widget>
+     <widget class="QWidget" name="page_app_coupon">
+      <widget class="QPushButton" name="button_app">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>190</y>
+         <width>80</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>App</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="button_coupon">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>190</y>
+         <width>80</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Coupon</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_scan_qr">
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>130</y>
+         <width>57</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Scann QR</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_open_door">
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>110</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Open door</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_insert_object">
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>146</x>
+         <y>110</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Insert Object</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_close_door">
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>156</x>
+         <y>140</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Close door</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_processing">
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>120</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Processing</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_full_bin">
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>130</y>
+         <width>131</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Recycling bin full</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
