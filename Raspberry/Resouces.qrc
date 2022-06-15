@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="Idle">
+    <file>New Project.png</file>
+    <file>Silab test.png</file>
+    <file>Silab-1.png</file>
+    <file>Silab-2.png</file>
+    <file>Silab-3.png</file>
+    <file>Silab-4.png</file>
+    <file>Silab-5.png</file>
+    <file>Silab-6.png</file>
+    <file>Silab-7.png</file>
+  </qresource>
+</RCC>
