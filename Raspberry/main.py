@@ -1,84 +1,12 @@
 # Main file
 
-import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
-from ui import Ui_Dialog
 from system import System
 
 
 class Main():
-	def __init__(self, ui):
+	def __init__(self):
 		self.system = System()
-		self.ui = ui
-
-		#######################################################################
-		# Ui Buttons
-		#######################################################################
-
-		# Button Idle
-		self.ui.button_idle.clicked.connect(
-			lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_app_coupon))
-
-		# Button App
-		self.ui.button_app.clicked.connect(
-			lambda: self.handle_app_selected())
-
-		# Button Coupon
-		self.ui.button_coupon.clicked.connect(
-			lambda: self.system.handle_open_door())
-
-	###########################################################################
-	# Switch UI screen functions
-	###########################################################################
-
-	def display_app_coupon_screen(self):
-		'''
-		Switches UI to app/coupon screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_app_coupon)
-
-	def display_scan_qr_screen(self):
-		'''
-		Switches UI to scan QR code screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_scan_qr)
-
-	def display_open_door_screen(self):
-		'''
-		Switches UI to open door screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_open_door)
-
-	def display_insert_object_screen(self):
-		'''
-		Switches UI to insert object screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_insert_object)
-
-	def display_close_door_screen(self):
-		'''
-		Switches UI to close door screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_close_door)
-
-	def display_processing_screen(self):
-		'''
-		Switches UI to processing screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_processing)
-
-	def display_idle_screen(self):
-		'''
-		Switches UI to idle screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_idle)
-
-	def display_full_bin_screen(self):
-		'''
-		Switches UI to full recycling bin screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_full_bin)
-
+		
 	###########################################################################
 	# UI System functions
 	###########################################################################
@@ -126,10 +54,4 @@ class Main():
 
 # Starts the UI
 if __name__ == "__main__":
-	app = QtWidgets.QApplication(sys.argv)
-	Dialog = QtWidgets.QDialog()
-	ui = Ui_Dialog()
-	ui.setupUi(Dialog)
-	gui = Main(ui)
-	Dialog.show()
-	sys.exit(app.exec_())
+	pass
