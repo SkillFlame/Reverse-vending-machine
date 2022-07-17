@@ -25,13 +25,9 @@ class System():
 		If is able to read QR code within a certain time period, returns True
 		Otherwise, returns False
 		'''
-		must_end = time.time() + settings.MAX_QR_READING_TIME
-		while(time.time() < must_end):
-			if(Sensors.read_qr_code()):
-				self.user_id = sensor.get_user_id()
-				return True
-
-			time.sleep(settings.SLEEP_TIME)
+		if(sensor.read_qr_code()):
+			self.user_id = sensor.get_user_id()
+			return True
 		return False
 
 	def handle_open_door(self):

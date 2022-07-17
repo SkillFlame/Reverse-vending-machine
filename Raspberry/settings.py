@@ -15,6 +15,9 @@ SLEEP_TIME = 0.25
 # Wait time for QR code reading
 MAX_QR_READING_TIME = 30
 
+# Wait time before entering Idle mode
+MAX_INACTIVE_TIME = 30
+
 ###############################################################################
 # notification.py
 ###############################################################################
