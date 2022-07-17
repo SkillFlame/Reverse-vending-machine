@@ -1,0 +1,45 @@
+#: kivy 2.1.0
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+
+
+<IdleScreen>:
+	name: "idle"
+	Image:
+		source: "Resources/test.png"
+	Button:
+		background_color: (0, 0, 0, 0)
+		on_touch_down:
+			root.manager.transition = NoTransition()
+			root.manager.current = "app_coupon"
+			app.start_inactive_timer()
+
+<AppCouponScreen>:
+	name: "app_coupon"
+	Image:
+		source: "Resources/test.png"
+	Button:
+		background_color: (1, 1, 1, 1)
+		size_hint: (.2, .2)
+		pos: (300, 300)
+		on_touch_down:
+			root.manager.transition = NoTransition()
+			root.manager.current = "qr_code"
+			app.reset_inactive_timer()
+			app.start_qr_code_timer()
+	Button:
+		background_color: (1, 1, 1, 1)
+		size_hint: (.2, .2)
+		pos: (300, 100)
+		on_touch_down:
+			root.manager.transition = NoTransition()
+			root.manager.current = "next_screen"
+			app.reset_inactive_timer()
+			app.handle_program_cycle()
+
+<QRCodeScreen>:
+	name: "qr_code"
+	Image:
+		source: "Resources/test.png"
+	Camera:
+		id: camera
+		resolution: (640, 480)

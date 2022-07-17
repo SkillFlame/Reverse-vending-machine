@@ -1,89 +1,70 @@
 # Main file
 
-import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
-from ui import Ui_Dialog
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.clock import Clock
+
 from system import System
+import settings
 
 
-class Main():
-	def __init__(self, ui):
+class IdleScreen(Screen):
+	pass
+
+
+class AppCouponScreen(Screen):
+	pass
+
+
+class QRCodeScreen(Screen):
+	pass
+
+
+class MainApp(App):
+	def __init__(self, *args):
 		self.system = System()
-		self.ui = ui
-
-		#######################################################################
-		# Ui Buttons
-		#######################################################################
-
-		# Button Idle
-		self.ui.button_idle.clicked.connect(
-			lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_app_coupon))
-
-		# Button App
-		self.ui.button_app.clicked.connect(
-			lambda: self.handle_app_selected())
-
-		# Button Coupon
-		self.ui.button_coupon.clicked.connect(
-			lambda: self.system.handle_open_door())
+		super(MainApp, self).__init__()
 
 	###########################################################################
-	# Switch UI screen functions
+	# UI functions
 	###########################################################################
 
-	def display_app_coupon_screen(self):
-		'''
-		Switches UI to app/coupon screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_app_coupon)
+	def set_idle_screen(self, *args):
+		self.stop_timers()
+		self.sm.current = 'idle'
+		self.create_new_system()
 
-	def display_scan_qr_screen(self):
-		'''
-		Switches UI to scan QR code screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_scan_qr)
+	def start_inactive_timer(self, *args):
+		self.idle_event = Clock.schedule_once(
+			self.set_idle_screen, settings.MAX_INACTIVE_TIME)
 
-	def display_open_door_screen(self):
-		'''
-		Switches UI to open door screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_open_door)
+	def reset_inactive_timer(self, *args):
+		self.stop_timers()
+		self.start_inactive_timer()
 
-	def display_insert_object_screen(self):
-		'''
-		Switches UI to insert object screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_insert_object)
+	def start_qr_code_timer(self, *args):
+		self.qr_code_event = Clock.schedule_interval(
+			self.handle_app_selected, 1/60)
 
-	def display_close_door_screen(self):
-		'''
-		Switches UI to close door screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_close_door)
+	def stop_timers(self, *args):
+		Clock.unschedule(all)
 
-	def display_processing_screen(self):
-		'''
-		Switches UI to processing screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_processing)
-
-	def display_idle_screen(self):
-		'''
-		Switches UI to idle screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_idle)
-
-	def display_full_bin_screen(self):
-		'''
-		Switches UI to full recycling bin screen
-		'''
-		self.ui.stackedWidget.setCurrentWidget(self.ui.page_full_bin)
+	def build(self):
+		Builder.load_file("ui.kv")
+		self.sm = ScreenManager()
+		self.sm.add_widget(IdleScreen())
+		self.sm.add_widget(AppCouponScreen())
+		self.sm.add_widget(QRCodeScreen())
+		# Window.size = (1920, 1080)
+		# Window.fullscreen = 'auto'
+		return self.sm
 
 	###########################################################################
-	# UI System functions
+	# System functions
 	###########################################################################
 
-	def create_new_ui_system(self):
+	def create_new_system(self):
 		'''
 		Creates a new system
 		'''
@@ -93,16 +74,15 @@ class Main():
 	# Main program functions
 	###########################################################################
 
-	def handle_app_selected(self):
+	def handle_app_selected(self, *args):
 		'''
 		Executes program functions necessary if app is chosen
 		'''
-		self.display_scan_qr_screen()
-		if(not self.system.handle_qr_code_reading()):
-			self.display_app_coupon_screen()
-		self.handle_program_cycle()
+		if(self.system.handle_qr_code_reading()):
+			self.stop_timers()
+			self.handle_program_cycle()
 
-	def handle_program_cycle(self):
+	def handle_program_cycle(self, *args):
 		'''
 		Executes main program functions
 		'''
@@ -119,17 +99,11 @@ class Main():
 		self.system.handle_points()
 		self.system.handle_idle()
 		self.display_idle_screen()
-		self.create_new_ui_system()
+		self.create_new_system()
 		if(self.system.handle_bin_capacity()):
 			self.display_full_bin_screen()
 
 
 # Starts the UI
 if __name__ == "__main__":
-	app = QtWidgets.QApplication(sys.argv)
-	Dialog = QtWidgets.QDialog()
-	ui = Ui_Dialog()
-	ui.setupUi(Dialog)
-	gui = Main(ui)
-	Dialog.show()
-	sys.exit(app.exec_())
+	MainApp().run()
